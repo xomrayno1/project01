@@ -13,7 +13,7 @@ import com.tamnc.domain.entity.Restaurant;
 import com.tamnc.domain.event.OrderCreatedEvent;
 import com.tamnc.domain.exception.OrderDomainException;
 import com.tamnc.domain.mapper.OrderDataMapper;
-import com.tamnc.domain.ports.output.message.publisher.payment.OrderCreatedPaymentRequestMessage;
+import com.tamnc.domain.ports.output.message.publisher.payment.OrderCreatedPaymentRequestMessagePublisher;
 import com.tamnc.domain.ports.output.repository.CustomerRepository;
 import com.tamnc.domain.ports.output.repository.OrderRepository;
 import com.tamnc.domain.ports.output.repository.RestaurantRepository;
@@ -38,7 +38,7 @@ public class OrderCreateCommandHandler {
 	
 	private final OrderDataMapper orderDataMapper;
 	
-	private final OrderCreatedPaymentRequestMessage orderCreatedPaymentRequestMessage;
+	private final OrderCreatedPaymentRequestMessagePublisher orderCreatedPaymentRequestMessage;
 	
 	private final ApplicationEventPublisher applicationEventPublisher;
 	
@@ -50,8 +50,9 @@ public class OrderCreateCommandHandler {
 		OrderCreatedEvent orderCreatedEvent = orderDomainService.validateAndInitiateOrder(order, restaurant);
 		Order orderResult = saveOrder(order);
 		log.info("Order is created with id: {} ", orderCreatedEvent.getOrder().getId().getValue());
+		
 		applicationEventPublisher.publishEvent(orderCreatedEvent);
-		return orderDataMapper.orderToCreateOrderResponse(orderResult, "success");
+		return orderDataMapper.orderToCreateOrderResponse(orderResult, "Order created successfully");
 	}
 	 
 	public void checkCustomer(UUID customerId) {

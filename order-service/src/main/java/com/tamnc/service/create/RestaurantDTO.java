@@ -1,22 +1,19 @@
-package com.tamnc.domain.entity;
+package com.tamnc.service.create;
 
 import java.util.List;
 
-import com.tamnc.entity.AggregateRoot;
+import com.tamnc.domain.entity.Product;
 import com.tamnc.objects.RestaurantId;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 
- 
 @Getter
-@Setter
+@AllArgsConstructor
 @Builder
-public class Restaurant extends AggregateRoot<RestaurantId>{
-	
- 
+public class RestaurantDTO {
+	private RestaurantId restaurantId;
 	private final List<Product> products;
 	private boolean active;
-
 }

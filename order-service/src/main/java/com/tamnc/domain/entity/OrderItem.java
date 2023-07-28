@@ -27,7 +27,7 @@ public class OrderItem extends BaseEntity<OrderItemId>{
 	}
 	
 	boolean isPriceValid(){
-		return price.isGreaterThanZero() && product.getPrice().equals(price)  && price.multiply(quantity).equals(subTotal);
+		return price.isGreaterThanZero() && price.multiply(quantity).equals(subTotal);
 	}
   	 
 }

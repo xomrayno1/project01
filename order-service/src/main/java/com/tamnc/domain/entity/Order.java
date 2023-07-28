@@ -17,10 +17,12 @@ import com.tamnc.objects.RestaurantId;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 @AllArgsConstructor
 @Getter
 @Builder
+@Setter
 public class Order extends AggregateRoot<OrderId>{
 	private final CustomerId customerId;
 	private final RestaurantId restaurantId;
@@ -38,7 +40,6 @@ public class Order extends AggregateRoot<OrderId>{
 		trackingId = new TrackingId(UUID.randomUUID());
 		orderStatus = OrderStatus.PENDING;
 		initializeOrderItem();
-		
 	}
 	
 	public void pay() {
@@ -89,7 +90,7 @@ public class Order extends AggregateRoot<OrderId>{
 	}
 	
 	private void validateInitialOrder() {
-		if(orderStatus != null || getId() == null) {
+		if(orderStatus != null || getId() != null) {
 			throw new OrderDomainException("Order is not incorrect state for initialization!");
 		}
 	}

@@ -4,6 +4,8 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.tamnc.domain.entity.Order;
 import com.tamnc.domain.entity.Product;
 import com.tamnc.domain.entity.Restaurant;
@@ -15,6 +17,7 @@ import com.tamnc.domain.exception.OrderDomainException;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@Service
 public class OrderDomainServiceImpl implements OrderDomainService {
 	
 	private static final String UTC = "UTC";

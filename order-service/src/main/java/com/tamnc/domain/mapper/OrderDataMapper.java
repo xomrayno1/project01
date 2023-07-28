@@ -19,19 +19,21 @@ import com.tamnc.service.create.CreateOrderCommand;
 import com.tamnc.service.create.CreateOrderResponse;
 import com.tamnc.service.create.OrderAddress;
 import com.tamnc.service.create.OrderItemDTO;
+import com.tamnc.service.track.TrackOrderResponse;
 
 @Component
 public class OrderDataMapper {
 	
 	public Restaurant createOrderCommandToRestaurant(CreateOrderCommand createOrderCommand) {
-		return Restaurant.builder()
-				.restaurantId(new RestaurantId(createOrderCommand.getRestaurantId()))
+		Restaurant restaurant =  Restaurant.builder()
 				.products(
 						createOrderCommand.getItems().stream()
 						.map(orderItem -> new Product(new ProductId(orderItem.getProductId())))
 						.collect(Collectors.toList())
 				)
 				.build();
+		restaurant.setId(new RestaurantId(createOrderCommand.getRestaurantId()));
+		return restaurant;
 	}
 	
 	public Order createOrderCommandToOrder(CreateOrderCommand createOrderCommand) {
@@ -40,6 +42,7 @@ public class OrderDataMapper {
 				.restaurantId(new RestaurantId(createOrderCommand.getRestaurantId()))
 				.deliveryAddress(orderAddressToStreetAddress(createOrderCommand.getAddress()))
 				.items(orderItemsToOrderItemEntites(createOrderCommand.getItems()))
+				.price(new Money(createOrderCommand.getPrice()))
 				.build();
 	}
 	
@@ -64,6 +67,14 @@ public class OrderDataMapper {
 				.orderTrackingId(order.getTrackingId().getValue())
 				.orderStatus(order.getOrderStatus())
 				.message(message)
+				.build();
+	}
+	
+	public TrackOrderResponse orderToTrackOrderResponse(Order order) {
+		return TrackOrderResponse.builder()
+				.orderStatus(order.getOrderStatus())
+				.failureMessages(order.getFailureMessage())
+				.orderTrackingId(order.getTrackingId().getValue())
 				.build();
 	}
 
