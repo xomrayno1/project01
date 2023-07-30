@@ -6,11 +6,13 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
+import com.tamnc.domain.entity.Customer;
 import com.tamnc.domain.entity.Order;
 import com.tamnc.domain.entity.OrderItem;
 import com.tamnc.domain.entity.Product;
 import com.tamnc.domain.entity.Restaurant;
 import com.tamnc.domain.objects.StreetAddress;
+import com.tamnc.domain.ports.input.message.dto.CustomerModel;
 import com.tamnc.objects.CustomerId;
 import com.tamnc.objects.Money;
 import com.tamnc.objects.ProductId;
@@ -77,5 +79,12 @@ public class OrderDataMapper {
 				.orderTrackingId(order.getTrackingId().getValue())
 				.build();
 	}
+	
+    public Customer customerModelToCustomer(CustomerModel customerModel) {
+        return new Customer(new CustomerId(UUID.fromString(customerModel.getId())),
+                customerModel.getUsername(),
+                customerModel.getFirstName(),
+                customerModel.getLastName());
+    }
 
 }
