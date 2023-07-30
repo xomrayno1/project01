@@ -12,7 +12,7 @@ import com.app.entity.Restaurant;
 import com.app.exception.OrderDomainException;
 import com.app.model.event.OrderCancelledEvent;
 import com.app.model.event.OrderCreatedEvent;
-import com.app.model.event.OrderPaintEvent;
+import com.app.model.event.OrderPaidEvent;
 import com.app.service.OrderDomainService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -34,10 +34,10 @@ public class OrderDomainServiceImpl implements OrderDomainService {
 	}
 
 	@Override
-	public OrderPaintEvent payOrder(Order order) {
+	public OrderPaidEvent payOrder(Order order) {
 		order.pay();
 		log.info("Order with id : {} is paid ", order.getId());
-		return new OrderPaintEvent(order, ZonedDateTime.now(ZoneId.of(UTC)));
+		return new OrderPaidEvent(order, ZonedDateTime.now(ZoneId.of(UTC)));
 	}
 
 	@Override

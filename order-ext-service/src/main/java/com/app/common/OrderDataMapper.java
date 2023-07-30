@@ -11,11 +11,15 @@ import com.app.entity.Order;
 import com.app.entity.OrderItem;
 import com.app.entity.Product;
 import com.app.entity.Restaurant;
+import com.app.kafka.model.RestaurantOrderStatus;
 import com.app.model.dto.CustomerModel;
 import com.app.model.dto.Money;
 import com.app.model.dto.OrderAddressDTO;
 import com.app.model.dto.OrderItemDTO;
 import com.app.model.dto.StreetAddressDTO;
+import com.app.model.event.OrderPaidEvent;
+import com.app.model.outbox.OrderApprovalEventPayload;
+import com.app.model.outbox.OrderApprovalEventProduct;
 import com.app.model.request.CreateOrderCommand;
 import com.app.model.response.CreateOrderResponse;
 import com.app.model.response.TrackOrderResponse;
@@ -81,6 +85,21 @@ public class OrderDataMapper {
                 customerModel.getUsername(),
                 customerModel.getFirstName(),
                 customerModel.getLastName());
+    }
+    
+    public OrderApprovalEventPayload orderPaidEventToOrderApprovalEventPayload(OrderPaidEvent orderPaidEvent) {
+        return OrderApprovalEventPayload.builder()
+                .orderId(orderPaidEvent.getOrder().getId().toString())
+                .restaurantId(orderPaidEvent.getOrder().getRestaurantId().toString())
+                .restaurantOrderStatus(RestaurantOrderStatus.PAID.name())
+                .products(orderPaidEvent.getOrder().getItems().stream().map(orderItem ->
+                        OrderApprovalEventProduct.builder()
+                                .id(orderItem.getProduct().getId().toString())
+                                .quantity(orderItem.getQuantity())
+                                .build()).collect(Collectors.toList()))
+                .price(orderPaidEvent.getOrder().getPrice().getAmount())
+               // .createdAt(orderPaidEvent.getCreatedAt())
+                .build();
     }
 
 }

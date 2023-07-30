@@ -7,9 +7,9 @@ import com.app.entity.Order;
 import lombok.Getter;
 
 @Getter
-public class OrderPaintEvent extends OrderEvent{
+public class OrderPaidEvent extends OrderEvent{
 
-	public OrderPaintEvent(Order order, ZonedDateTime createAt) {
+	public OrderPaidEvent(Order order, ZonedDateTime createAt) {
 		super(order, createAt);
 	}
  

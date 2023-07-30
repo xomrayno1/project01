@@ -19,6 +19,7 @@ import com.app.repository.CustomerRepository;
 import com.app.repository.OrderRepository;
 import com.app.repository.RestaurantRepository;
 import com.app.service.OrderDomainService;
+import com.app.service.messaging.listener.ApplicationDomainEventPublisher;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -41,6 +42,8 @@ public class OrderCreateCommandHandler {
 	
 	private final ApplicationEventPublisher applicationEventPublisher;
 	
+	private final ApplicationDomainEventPublisher applicationDomainEventPublisher;
+	
 	@Transactional
 	public CreateOrderResponse createOrder(CreateOrderCommand createOrderCommand) {
 		checkCustomer(createOrderCommand.getCustomerId());
@@ -51,6 +54,7 @@ public class OrderCreateCommandHandler {
 		log.info("Order is created with id: {} ", orderCreatedEvent.getOrder().getId());
 		
 		applicationEventPublisher.publishEvent(orderCreatedEvent);
+		 
 		return orderDataMapper.orderToCreateOrderResponse(orderResult, "Order created successfully");
 	}
 	 

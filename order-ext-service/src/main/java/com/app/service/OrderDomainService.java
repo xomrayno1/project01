@@ -6,13 +6,13 @@ import com.app.entity.Order;
 import com.app.entity.Restaurant;
 import com.app.model.event.OrderCancelledEvent;
 import com.app.model.event.OrderCreatedEvent;
-import com.app.model.event.OrderPaintEvent;
+import com.app.model.event.OrderPaidEvent;
 
 public interface OrderDomainService {
 	
 	OrderCreatedEvent validateAndInitiateOrder(Order order, Restaurant restaurant);
 	
-	OrderPaintEvent payOrder(Order order);
+	OrderPaidEvent payOrder(Order order);
 	
 	void aprroveOrder(Order order);
 	

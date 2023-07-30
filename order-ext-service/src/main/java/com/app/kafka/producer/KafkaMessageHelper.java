@@ -32,8 +32,7 @@ public class KafkaMessageHelper {
         }
     }
 
-    public <T, U> CompletableFuture<SendResult<String, T>>
-    getKafkaCallback(String responseTopicName, T avroModel, U outboxMessage,
+    public <T, U> CompletableFuture<SendResult<String, T>> getKafkaCallback(String responseTopicName, T avroModel, U outboxMessage,
                      BiConsumer<U, OutboxStatus> outboxCallback,
                      String orderId, String avroModelName) {
     	
@@ -41,8 +40,8 @@ public class KafkaMessageHelper {
     	handle.whenComplete((result, ex) -> {
             if (ex == null) {
               RecordMetadata metadata = result.getRecordMetadata();
-              log.info("Received successful response from Kafka for order id: {}" +
-                              " Topic: {} Partition: {} Offset: {} Timestamp: {}",
+              log.info("Received successful response from Kafka for order id: {}" 
+            		  + " Topic: {} Partition: {} Offset: {} Timestamp: {}",
                       orderId,
                       metadata.topic(),
                       metadata.partition(),

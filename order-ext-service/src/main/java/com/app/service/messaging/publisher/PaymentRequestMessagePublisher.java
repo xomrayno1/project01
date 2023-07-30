@@ -6,6 +6,8 @@ import com.app.enums.OutboxStatus;
 import com.app.model.outbox.OrderPaymentOutboxMessage;
 
 public interface PaymentRequestMessagePublisher {
+	
 	  void publish(OrderPaymentOutboxMessage orderPaymentOutboxMessage,
               BiConsumer<OrderPaymentOutboxMessage, OutboxStatus> outboxCallback);
+	  
 }

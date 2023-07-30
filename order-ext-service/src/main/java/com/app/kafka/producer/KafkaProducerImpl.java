@@ -31,11 +31,7 @@ public class KafkaProducerImpl<K extends Serializable, V extends SpecificRecordB
  
             CompletableFuture<SendResult<K, V>> kafkaResultFuture = kafkaTemplate.send(topicName, key, message);
             kafkaResultFuture.whenComplete((result, ex) -> {
-                if (ex == null) {
-                	callback.runAsync(null);
-                }else {
-                    
-                }
+            	callback.runAsync(null);
             });
             
         } catch (KafkaException e) {
