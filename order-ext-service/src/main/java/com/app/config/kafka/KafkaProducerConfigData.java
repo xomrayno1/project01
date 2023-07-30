@@ -1,4 +1,4 @@
-package com.app.kafka.config;
+package com.app.config.kafka;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;

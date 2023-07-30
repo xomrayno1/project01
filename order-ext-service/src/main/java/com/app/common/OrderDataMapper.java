@@ -13,9 +13,9 @@ import com.app.entity.Product;
 import com.app.entity.Restaurant;
 import com.app.model.dto.CustomerModel;
 import com.app.model.dto.Money;
-import com.app.model.dto.OrderAddress;
+import com.app.model.dto.OrderAddressDTO;
 import com.app.model.dto.OrderItemDTO;
-import com.app.model.dto.StreetAddress;
+import com.app.model.dto.StreetAddressDTO;
 import com.app.model.request.CreateOrderCommand;
 import com.app.model.response.CreateOrderResponse;
 import com.app.model.response.TrackOrderResponse;
@@ -44,8 +44,8 @@ public class OrderDataMapper {
 				.build();
 	}
 	
-	public StreetAddress orderAddressToStreetAddress(OrderAddress address) {
-		return new StreetAddress(UUID.randomUUID(), address.getStreet(), address.getPostalCode(), address.getCity());
+	public StreetAddressDTO orderAddressToStreetAddress(OrderAddressDTO address) {
+		return new StreetAddressDTO(UUID.randomUUID(), address.getStreet(), address.getPostalCode(), address.getCity());
 	}
  
 	public List<OrderItem> orderItemsToOrderItemEntites(List<OrderItemDTO> orderItems){

@@ -8,7 +8,7 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public class StreetAddress {
+public class StreetAddressDTO {
 	private final UUID id;
 	private final String street;
 	private final String postalCode;
@@ -19,7 +19,7 @@ public class StreetAddress {
 	public boolean equals(Object obj) {
 		if(this == obj) return true;
 		if(obj == null || getClass() != obj.getClass()) return false;
-		StreetAddress streetAddress = (StreetAddress) obj;
+		StreetAddressDTO streetAddress = (StreetAddressDTO) obj;
 		return street.equals(streetAddress.getStreet()) && postalCode.equals(streetAddress.getPostalCode()) && city.equals(streetAddress.getCity());
 	}
 	

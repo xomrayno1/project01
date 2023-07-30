@@ -1,4 +1,4 @@
-package com.app.model.event.publisher;
+package com.app.service.messaging.publisher;
 
 import java.util.function.BiConsumer;
 

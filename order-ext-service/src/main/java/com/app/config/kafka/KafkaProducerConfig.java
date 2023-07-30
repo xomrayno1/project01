@@ -1,4 +1,4 @@
-package com.app.kafka.config;
+package com.app.config.kafka;
 
 import java.io.Serializable;
 import java.util.HashMap;

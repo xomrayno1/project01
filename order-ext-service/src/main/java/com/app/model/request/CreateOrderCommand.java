@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
-import com.app.model.dto.OrderAddress;
+import com.app.model.dto.OrderAddressDTO;
 import com.app.model.dto.OrderItemDTO;
 
 import lombok.AllArgsConstructor;
@@ -24,6 +24,6 @@ public class CreateOrderCommand {
 	
 	private final List<OrderItemDTO> items;
 	
-	private final OrderAddress address;
+	private final OrderAddressDTO address;
 
 }

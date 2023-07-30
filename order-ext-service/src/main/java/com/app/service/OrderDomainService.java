@@ -9,6 +9,7 @@ import com.app.model.event.OrderCreatedEvent;
 import com.app.model.event.OrderPaintEvent;
 
 public interface OrderDomainService {
+	
 	OrderCreatedEvent validateAndInitiateOrder(Order order, Restaurant restaurant);
 	
 	OrderPaintEvent payOrder(Order order);

@@ -5,12 +5,11 @@ import java.util.function.BiConsumer;
 import org.springframework.stereotype.Component;
 
 import com.app.common.OrderMessagingDataMapper;
-import com.app.common.OrderServiceConfigData;
+import com.app.config.OrderServiceConfigData;
 import com.app.enums.OutboxStatus;
 import com.app.kafka.model.PaymentRequestAvroModel;
 import com.app.kafka.producer.KafkaMessageHelper;
 import com.app.kafka.producer.KafkaProducer;
-import com.app.model.event.publisher.PaymentRequestMessagePublisher;
 import com.app.model.outbox.OrderPaymentEventPayload;
 import com.app.model.outbox.OrderPaymentOutboxMessage;
 

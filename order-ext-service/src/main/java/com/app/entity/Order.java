@@ -6,7 +6,7 @@ import java.util.UUID;
 import com.app.enums.OrderStatus;
 import com.app.exception.OrderDomainException;
 import com.app.model.dto.Money;
-import com.app.model.dto.StreetAddress;
+import com.app.model.dto.StreetAddressDTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,7 +20,7 @@ import lombok.Setter;
 public class Order extends AggregateRoot<UUID>{
 	private final UUID customerId;
 	private final UUID restaurantId;
-	private final StreetAddress deliveryAddress;
+	private final StreetAddressDTO deliveryAddress;
 	private final Money price;
 	private final List<OrderItem> items;
 	

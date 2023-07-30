@@ -1,4 +1,4 @@
-package com.app.model.event.publisher;
+package com.app.service.messaging.listener;
 
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationEventPublisherAware;
